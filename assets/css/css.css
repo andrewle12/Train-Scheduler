@@ -1,0 +1,64 @@
+body {
+  background-image: url("../images/background.png");
+}
+
+#title {
+  color: white;
+  text-align: center;
+  background-color: blue;
+  width: 50%;
+  margin: auto;
+  padding: 25px;
+}
+
+#current {
+  background: white;
+  outline-color: blue;
+  outline-width: 2px;
+  margin: auto;
+  width: 50%;
+}
+
+#text {
+  color: white;
+  background-color: blue;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 8px;
+  font-weight: bold;
+}
+p {
+  font-size: 12.5px;
+  padding-left: 8px;
+}
+.form-control {
+  width: 98%;
+  margin: auto;
+  height: 28px;
+}
+.btn-primary {
+  margin-left: 6px;
+  height: 35px;
+}
+th {
+  color: rgb(61, 155, 155);
+  font-size: 16px;
+  padding: 7px;
+}
+tr {
+  border-bottom : solid;
+  border-width: 1px 0;
+  
+}
+td {
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+}
