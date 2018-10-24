@@ -1,6 +1,6 @@
 //Firebase Initialization
 var config = {
-    apiKey: "AIzaSyBERiLp7BG6SXzEeZu-aVkcch934Ygr5sA",
+    apiKey: "###",  //removed API Key
     authDomain: "homework-7-1d926.firebaseapp.com",
     databaseURL: "https://homework-7-1d926.firebaseio.com",
     projectId: "homework-7-1d926",
