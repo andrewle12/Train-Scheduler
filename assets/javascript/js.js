@@ -12,24 +12,16 @@ var config = {
   var database = firebase.database();
 
 
-
-//Global declaration of variables
-var trainName="";
-var destination="";
-var trainTime="";
-var frequency="";
-var time;
-
-
 //On-Click event for the submit button
 $(".btn-primary").on("click", function(event){
     event.preventDefault();
 
     //User inputs
-    trainName = $("#name").val().trim();
-    destination = $("#destination").val().trim();
-    trainTime =  $("#time").val().trim();
-    frequency =  $("#frequency").val().trim();
+   var trainName = $("#name").val().trim();
+   var destination = $("#destination").val().trim();
+   var trainTime =  $("#time").val().trim();
+   var frequency =  $("#frequency").val().trim();
+   userValidation(frequency);
 
     //Local temporary newTrain object
     var newTrainObj = {
@@ -100,3 +92,12 @@ $("#text").text("Current Train Schedule"+'\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\x
 }
 
 setInterval(currentTime, 1000);
+
+
+//User input validation for frequency
+var userValidation = function(e){
+    if (isNaN(e)){
+        alert("Please enter a valid number for frequency");
+        throw "Frequency is not a number";
+    }
+}
