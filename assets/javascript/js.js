@@ -66,7 +66,7 @@ database.ref().on("child_added", function(snapshot){
    console.log(timeDifference);
    
    var timeLeft = timeDifference%newFrequency;
-   var minutesAway = newFrequency - timeLeft;
+   var minutesAway = newFrequency-timeLeft;
    var nextTrain = moment().add(minutesAway, 'minutes');
    nextTrain = moment(nextTrain).format('hh:mm a');
    console.log(nextTrain);
