@@ -21,7 +21,15 @@ $(".btn-primary").on("click", function(event){
    var destination = $("#destination").val().trim();
    var trainTime =  $("#time").val().trim();
    var frequency =  $("#frequency").val().trim();
+
+   //Validation for blank fields
+   userValidation(trainName);
+   userValidation(destination);
+   userValidation(trainTime);
    userValidation(frequency);
+
+   //Validation for isNaN
+   userValidationNumber(frequency);
 
     //Local temporary newTrain object
     var newTrainObj = {
@@ -95,9 +103,17 @@ setInterval(currentTime, 1000);
 
 
 //User input validation for frequency
-var userValidation = function(e){
+var userValidationNumber = function(e){
     if (isNaN(e)){
         alert("Please enter a valid number for frequency");
         throw "Frequency is not a number";
+    }
+}
+
+//User input validation for blank fields
+var userValidation = function(e){
+    if (e === ""){
+        alert("Please fill out all fields");
+        throw "Not all fields filled out";
     }
 }
