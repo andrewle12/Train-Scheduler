@@ -18,6 +18,7 @@ var trainName="";
 var destination="";
 var trainTime="";
 var frequency="";
+var time;
 
 
 //On-Click event for the submit button
@@ -43,27 +44,42 @@ $(".btn-primary").on("click", function(event){
     clearFields();
 });
 
-
+//Snapshot event of when data is added to firebase
 database.ref().on("child_added", function(snapshot){
     console.log(snapshot.val());
 
     //Create new row and define data values
-    var newRow = $("<tr></tr>");
-    var newTrain = $("<td></td>");
+    var newRow = $("<tr>");
+    var newTrain = $("<td>");
     $(newTrain).text(snapshot.val().name);
-    var newDestination = $("<td></td>");
+    var newDestination = $("<td>");
     $(newDestination).text(snapshot.val().destination);
-    var newTime = $("<td></td>");
-    $(newTime).text(snapshot.val().time);
-    var newFrequency = $("<td></td>");
-    $(newFrequency).text(snapshot.val().frequency);
+    var newTime = snapshot.val().time;
+    var newFrequency = parseInt(snapshot.val().frequency);
+
+   //Converting the times and doing the math
+   newTime = moment(snapshot.val().time, "HH:mm").format("X");
+   console.log(newTime);
+
+   newTime =  moment(newTime, "X").subtract(1,'years');
+   var timeDifference = moment().diff(newTime, 'minutes');
+   console.log(timeDifference);
+   
+   var timeLeft = timeDifference%newFrequency;
+   var minutesAway = newFrequency - timeLeft;
+   var nextTrain = moment().add(minutesAway, 'minutes');
+   nextTrain = moment(nextTrain).format('hh:mm a');
+   console.log(nextTrain);
+
 
 
     //Append to new row the data
     $(newRow).append(newTrain);
     $(newRow).append(newDestination);
-    $(newRow).append(newTime);
-    $(newRow).append(newFrequency);
+    $(newRow).append($("<td>").text(newFrequency));
+    $(newRow).append($("<td>").text(nextTrain));
+    $(newRow).append($("<td>").text(minutesAway));
+
 
 
     //Append the new row to the table
@@ -75,3 +91,12 @@ database.ref().on("child_added", function(snapshot){
 var clearFields = function(){
     $(".form-control").val("");
 }
+
+//Displays Current Time to update every second
+
+var currentTime = function(){
+    time = moment().format('MMMM Do YYYY, h:mm:ss a');
+$("#text").text("Current Train Schedule"+'\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0'+time);
+}
+
+setInterval(currentTime, 1000);
